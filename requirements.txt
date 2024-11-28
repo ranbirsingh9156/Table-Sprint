@@ -1,0 +1,4 @@
+frontend$   npm install react-router-dom zustand axios react-hook-form @hookform/resolvers zod @testing-library/react jest @testing-library/jest-dom @testing-library/user-event react-toastify tailwindcss autoprefixer postcss
+
+
+backend$   npm install express mongoose jsonwebtoken bcrypt express-validator winston cors

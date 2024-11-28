@@ -1,6 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 import './index.css';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -10,6 +12,7 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
+        <ToastContainer /> // Add the ToastContainer component here
         <a
           className="App-link"
           href="https://reactjs.org"
