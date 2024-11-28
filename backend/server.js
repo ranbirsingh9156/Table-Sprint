@@ -10,6 +10,9 @@ const subcategoryRoutes = require('./src/routes/subCategories');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+const helmet = require('helmet');
+
+app.use(require('./src/middleware/errorHandler')); // Apply error handler last
 
 //Enable CORS
 app.use(cors());
@@ -32,6 +35,7 @@ const connectDB = async () => {
   }
 };
 connectDB();
+app.use(helmet());
 
 // Define Routes
 app.use('/api/auth', authRoutes);
