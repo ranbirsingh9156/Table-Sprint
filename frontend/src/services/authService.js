@@ -107,11 +107,43 @@ const logout = () => {
   // Perform any other necessary logout actions, e.g., redirect to login
 };
 
+const requestPasswordReset = async (email) => {
+  try {
+    const res = await axios.post('/password-reset', { email }); //add the API endpoint on the backend
+    return res.data;
+  } catch (error) {
+    if (error.response && error.response.data && error.response.data.message) {
+      throw new Error(error.response.data.message);
+    } else {
+      throw new Error(
+        'Failed to request password reset. Please try again later.'
+      );
+    }
+  }
+};
+
+const resetPassword = async (token, password) => {
+  try {
+    const res = await axios.put(`${API_BASE_URL}/reset-password/${token}`, {
+      password,
+    });
+    return res.data;
+  } catch (error) {
+    if (error.response && error.response.data && error.response.data.message) {
+      throw new Error(error.response.data.message);
+    } else {
+      throw new Error('Password reset failed. Please try again later.');
+    }
+  }
+};
+
 const authService = {
   register,
   login,
   logout,
   setAuthToken,
+  requestPasswordReset,
+  resetPassword,
 };
 
 export default authService;

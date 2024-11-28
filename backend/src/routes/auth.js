@@ -4,6 +4,8 @@ const { check, validationResult } = require('express-validator'); // Import vali
 const authController = require('../controllers/authController');
 const auth = require('../middleware/authMiddleware'); // Import the middleware
 
+const crypto = require('crypto'); // Import crypto for generating random tokens
+const nodemailer = require('nodemailer');
 router.post(
   '/register',
   [
@@ -32,6 +34,40 @@ router.get('/user', auth, async (req, res) => {
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
+  }
+});
+router.put('/reset-password/:token', async (req, res) => {
+  try {
+    const { token } = req.params;
+    const { password } = req.body;
+
+    const user = await User.findOne({
+      //find user with the given token and expiry time
+      resetPasswordToken: token,
+      resetPasswordExpires: { $gt: Date.now() }, //token must be not expired
+    });
+
+    if (!user) {
+      //if not found
+      return res.status(400).json({ message: 'Invalid or expired token.' }); //send error message
+    }
+
+    user.password = password; //update password and related fields
+
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpires = undefined;
+
+    await user.save(); //save to database
+
+    res.status(200).json({ message: 'Password reset successful.' }); //send response to the client
+  } catch (error) {
+    console.error('Password reset error:', error); //log the error for debugging
+    res
+      .status(500)
+      .json({
+        message:
+          error?.message || 'Failed to reset password. Please try again later.',
+      }); //send error response
   }
 });
 
