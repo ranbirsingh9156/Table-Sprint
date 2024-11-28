@@ -55,9 +55,22 @@ const deleteProduct = async (id) => {
   }
 };
 
+const getProductById = async (id) => {
+  try {
+    const res = await axios.get(`${API_BASE_URL}/${id}`);
+    return res.data;
+  } catch (error) {
+    console.error(`Error fetching product with ID ${id}:`, error);
+    toast.error(error?.response?.data?.message || `Failed to fetch product with ID ${id}.`);
+    throw error; // Re-throw the error for the component to handle if needed
+  }
+};
+
+//other exports
 export default {
-  getAllProducts,
-  createProduct,
-  updateProduct,
-  deleteProduct,
+getAllProducts,
+createProduct,
+updateProduct,
+deleteProduct,
+getProductById, // Add getProductById to the exported functions
 };

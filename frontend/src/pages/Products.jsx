@@ -5,6 +5,7 @@ import GenericDataTable from '../components/UI/GenericDataTable';
 import AddProductForm from '../components/Products/AddProductForm';
 import EditProductForm from '../components/Products/EditProductForm';
 import Modal from '../components/UI/Modal';
+import ProductList from '../components/Products/ProductList';  // Import ProductList
 
 
 
@@ -142,6 +143,7 @@ const Products = () => {
               ) : (
                 <GenericDataTable data={products} columns={columns} onDelete={handleDelete} onEdit={handleEdit} /> //render the data table
       )}
+      <ProductList products={products} loading={loading} error={error} onDelete={handleDelete} onEdit={handleEdit} />
 
     </div>
   );

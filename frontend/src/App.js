@@ -14,6 +14,7 @@ import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for react-toas
 import PasswordResetPage from './pages/PasswordResetPage';
 import HomePage from './pages/HomePage';
 import LogoutPage from './pages/LogoutPage';
+import ProductDetails from './components/Products/ProductDetails'; // Import the component
 
 // Protected Route component (requires authentication to access)
 
@@ -57,7 +58,8 @@ function App() {
           {/*Password reset route*/}
           <Route path="/logout" element={<LogoutPage />} /> {/*Logout route*/}
           <Route path="/" element={<ProtectedRoute element={<AppLayout />} />}>
-            {' '}
+            <Route path=":id" element={<ProductDetails />} />{' '}
+            {/* Route for viewing product details */}
             {/*Protected route using ProtectedRoute component*/}
             <Route index element={<HomePage />} />{' '}
             {/* Home route (protected) */}

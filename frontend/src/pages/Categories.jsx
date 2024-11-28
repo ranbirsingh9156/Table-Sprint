@@ -5,6 +5,7 @@ import GenericDataTable from '../components/UI/GenericDataTable';
 import AddCategoryForm from '../components/Categories/AddCategoryForm';  //make sure to implement this
 import EditCategoryForm from '../components/Categories/EditCategoryForm'; //make sure to implement this
 import Modal from '../components/UI/Modal';
+import CategoryList from '../components/Categories/CategoryList';  // Import
 
 
 
@@ -117,6 +118,7 @@ const Categories = () => {
                 <GenericDataTable data={categories} columns={columns} onDelete={handleDelete} onEdit={handleEdit} />
             )
         }
+        <CategoryList categories={categories} loading={loading} error={error} onDelete={handleDelete} onEdit={handleEdit} />
 
         </div>
 

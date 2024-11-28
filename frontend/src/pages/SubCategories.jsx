@@ -5,6 +5,7 @@ import GenericDataTable from '../components/UI/GenericDataTable';
 import AddSubCategoryForm from '../components/SubCategories/AddSubCategoryForm';
 import EditSubCategoryForm from '../components/SubCategories/EditSubCategoryForm';
 import Modal from '../components/UI/Modal';
+import SubCategoryList from '../components/SubCategories/SubCategoryList';  // Import
 
 
 
@@ -159,6 +160,8 @@ const SubCategories = () => {
 
 
             )}
+            <SubCategoryList subCategories={subCategories} loading={loading} error={error} onDelete={handleDelete} onEdit={handleEdit} />
+
 
 
 
